@@ -61,14 +61,10 @@ Jobs can be posted in the following categories:
 - Other
 
 ## License
-This project is open-source and available under the MIT License.
+This project is open-source.
 
 ## Contributing
 Feel free to submit pull requests or open issues to suggest improvements!
 
-## Contact
-For any issues or suggestions, reach out to **your-email@example.com**.
-
----
 Happy Job Posting! 🚀
 
