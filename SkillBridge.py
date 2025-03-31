@@ -48,7 +48,7 @@ def post_job():
                 print("Please enter a job title.")
             else:
                 break 
-            except ValueError:
+        except ValueError:
                 print("Invalid input. Please enter valid text title.")
     # Validate description input 
     while True:
@@ -58,7 +58,7 @@ def post_job():
                 print("Please enter a job description.")
             else:
                 break
-            except ValueError:
+        except ValueError:
                 print("Invalid input. Please enter a valid text validation.")
     # Validate pay input
     while True:
