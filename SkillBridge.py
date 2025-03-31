@@ -107,3 +107,30 @@ def post_job():
                    (job_id, title, description, pay, contact, location, category, job_date))
     conn.commit()
     print(f"Job posted! Save this job ID for management: {job_id}")
+
+# Main execution unit
+def main():
+    while True:
+        print("\nSkillBridge - Job Marketplace")
+        print("1. Post a Job")
+        print("2. Browse Jobs")
+        print("3. Manage Jobs")
+        print("4. Exit")
+        choice = input("Choice: ")
+
+        if choice == "1":
+            post_job()
+        elif choice == "2":
+            browse_jobs()
+        elif choice == "3":
+            manage_jobs()
+        elif choice == "4":
+            print("Goodbye!")
+            break
+        else:
+            print("Invalid choice.")
+
+if __name__ == "__main__":
+    main()
+    cursor.close()
+    conn.close()
