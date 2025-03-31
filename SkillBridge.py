@@ -109,6 +109,8 @@ def post_job():
     print(f"Job posted! Save this job ID for management: {job_id}")
 
 # Function allows job seekers to browse for jobs
+
+
 def browse_jobs():
     # Get validated category
     category = get_valid_category()
