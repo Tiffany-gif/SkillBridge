@@ -109,6 +109,7 @@ def post_job():
     conn.commit()
     print(f"Job posted! Save this job ID for management: {job_id}")
 
+<<<<<<< HEAD
    
 # Function allows job postsers to manage(edit/delete) job posts
 def manage_jobs():
@@ -195,3 +196,46 @@ def manage_jobs():
         print("Job deleted!")
     else:
         print("Invalid choice.")  
+=======
+# Function allows job seekers to browse for jobs
+
+
+def browse_jobs():
+    # Get validated category
+    category = get_valid_category()
+    # Fetch All jobs in specified category
+    cursor.execute("SELECT title, description, pay, contact, location, job_date FROM jobs WHERE category = %s", (category,))
+    jobs = cursor.fetchall()
+    if jobs:
+        for job in jobs:
+            print(f"\nTitle: {job[0]}\nDescription: {job[1]}\nPay: ${job[2]}\nContact: {job[3]}\nLocation: {job[4]}\nDate: {job[5]}")
+    else:
+        print("No jobs found.")
+
+# Main execution unit
+def main():
+    while True:
+        print("\nSkillBridge - Job Marketplace")
+        print("1. Post a Job")
+        print("2. Browse Jobs")
+        print("3. Manage Jobs")
+        print("4. Exit")
+        choice = input("Choice: ")
+
+        if choice == "1":
+            post_job()
+        elif choice == "2":
+            browse_jobs()
+        elif choice == "3":
+            manage_jobs()
+        elif choice == "4":
+            print("Goodbye!")
+            break
+        else:
+            print("Invalid choice.")
+
+if __name__ == "__main__":
+    main()
+    cursor.close()
+    conn.close()
+>>>>>>> 14fbc7368e9d2967483abe133d59930f9ef1795d
