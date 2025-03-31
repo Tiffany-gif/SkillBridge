@@ -37,6 +37,7 @@ CATEGORIES = [
     "Photography", "Music", "Teaching", "Handyman", "Other"
 ]
 
+
 # Function posts a job and saves it into the SkillBridge database
 def post_job():
     # Validate title input 
@@ -107,3 +108,90 @@ def post_job():
                    (job_id, title, description, pay, contact, location, category, job_date))
     conn.commit()
     print(f"Job posted! Save this job ID for management: {job_id}")
+
+   
+# Function allows job postsers to manage(edit/delete) job posts
+def manage_jobs():
+    job_id = input("Enter your job ID: ")
+    cursor.execute("SELECT * FROM jobs WHERE id = %s", (job_id,))
+    job = cursor.fetchone()
+    
+    if not job:
+        print("Job not found!")
+        return
+    
+    action = input("Edit or Delete? (e/d): ").strip().lower()
+    if action == "e":
+        # Validate title input
+        while True:
+            try:
+                title = str(input(f"New title ({job[1]}): ")).strip() or job[1]
+                if len(title) == 0:
+                    print("Please enter a job title.")
+                else:
+                    break
+            except ValueError:
+                print("Invalid input. Please enter a valid text title.")
+        # Validate description input
+        while True:
+            try:
+                description = str(input(f"New description ({job[2]}): ").strip() or job[2])
+                if len(description) == 0:
+                    print("Please enter a job description.")
+                else:
+                    break
+            except ValueError:
+                print("Invalid input. Please enter a valid text description.")
+        # Validate pay input
+        while True:
+            try:
+                pay = input(f"New pay ({job[3]}) USD: ").strip() or job[3]
+                pay = float(pay)
+                if pay < 0:
+                    print("Pay cannot be negative.")
+                else:
+                    break
+            except ValueError:
+                print("Invalid input. Enter a valid number.")
+        
+        # Validate contact input
+        while True:
+            try:
+                contact = str(input(f"New contact ({job[4]}): ")).strip() or job[4]
+                if len(contact) == 0:
+                    print("Please enter a contact. Email or Phone.")
+                else:
+                    break
+            except ValueError:
+                print("Invalid input. Please enter a valid contact. Email or Phone")
+        
+        # Validate location input
+        while True:
+            try:
+                location = str(input(f"New location ({job[5]}): ")).strip() or job[5]
+                if len(location) == 0:
+                    print("Please enter a job location.")
+                else:
+                    break
+            except ValueError:
+                print("Invalid input. Please enter a valid text location.")
+        
+        # Validate job date input
+        while True:
+            job_date = str(input(f"New job date ({job[7]}): ")).strip() or job[7].strftime('%Y-%m-%d %H:%M')
+            try:
+                job_date = datetime.datetime.strptime(job_date, "%Y-%m-%d %H:%M")
+                break
+            except ValueError:
+                print("Invalid date format. Please enter in YYYY-MM-DD HH:MM format.")
+        
+        cursor.execute("UPDATE jobs SET title=%s, description=%s, pay=%s, contact=%s, location=%s, job_date=%s WHERE id=%s",
+                       (title, description, pay, contact, location, job_date, job_id))
+        conn.commit()
+        print("Job updated!")
+    elif action == "d":
+        cursor.execute("DELETE FROM jobs WHERE id = %s", (job_id,))
+        conn.commit()
+        print("Job deleted!")
+    else:
+        print("Invalid choice.")  
