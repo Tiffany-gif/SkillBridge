@@ -109,7 +109,6 @@ def post_job():
     conn.commit()
     print(f"Job posted! Save this job ID for management: {job_id}")
 
-<<<<<<< HEAD
    
 # Function allows job postsers to manage(edit/delete) job posts
 def manage_jobs():
@@ -195,8 +194,8 @@ def manage_jobs():
         conn.commit()
         print("Job deleted!")
     else:
-        print("Invalid choice.")  
-=======
+        print("Invalid choice.") 
+
 # Function allows job seekers to browse for jobs
 
 
@@ -238,4 +237,3 @@ if __name__ == "__main__":
     main()
     cursor.close()
     conn.close()
->>>>>>> 14fbc7368e9d2967483abe133d59930f9ef1795d
