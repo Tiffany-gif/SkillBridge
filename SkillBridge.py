@@ -37,6 +37,24 @@ CATEGORIES = [
     "Photography", "Music", "Teaching", "Handyman", "Other"
 ]
 
+# Creates a unique alpha numeric string that identifies each job post
+def generate_job_id():
+    return ''.join(random.choices(string.ascii_uppercase + string.digits, k=6))
+
+# Function to get a valid category
+def get_valid_category():
+    while True:
+        print("Select a category:")
+        for i, category in enumerate(CATEGORIES, 1):
+            print(f"{i}. {category}")
+        try:
+            choice = int(input("Enter number: "))
+            if 1 <= choice <= len(CATEGORIES):
+                return CATEGORIES[choice - 1]
+            else:
+                print("Invalid selection. Please enter a valid choice.")
+        except ValueError:
+            print("Invalid input. Please enter a number.")
 
 # Function posts a job and saves it into the SkillBridge database
 def post_job():
